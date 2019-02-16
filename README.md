@@ -2,6 +2,7 @@
 This is a project for the POO exercise, to try the library wxWidgets
 
 # Structure
+```bash
 .
 ├── build
 │   ├── src
@@ -30,6 +31,6 @@ This is a project for the POO exercise, to try the library wxWidgets
         └── tests-auto.cpp
 
 16 directories, 9 files
-
+```
 # Copyright 
 The make file has been made by @Aloike
