@@ -25,8 +25,11 @@ private:
 };
 enum
 {
-    ID_Hello = 1,
-    ID_Text  = 2
+    ID_Hello            =   1,
+    ID_Text             =   2,
+    ID_dollarsButton    =   3,
+    ID_euroButton       =   4,
+    ID_quitButton       =   5
 };
 wxIMPLEMENT_APP(MyApp);
 bool MyApp::OnInit()
@@ -42,6 +45,30 @@ MyFrame::MyFrame()
     GetClientSize(&w, &h);
     h1 = 0.6*h; h2 = 0.2*h; h3 = h-h1-h2;
     w1 = 0.5*w; w2 = w-w1;
+
+
+    wxBoxSizer *sizerTop       = new wxBoxSizer(wxVERTICAL);
+    SetSizer(sizerTop);
+    wxBoxSizer *sizerText      = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer *sizerButton    = new wxBoxSizer(wxHORIZONTAL);
+    
+    wxButton *euroButton            =   new wxButton(this, ID_euroButton, _T("EURO"), wxDefaultPosition, wxDefaultSize,0);
+    wxButton *quitButton            =   new wxButton(this, ID_quitButton, _T("QUIT"));
+    wxButton *dollarsButton         =   new wxButton(this, ID_dollarsButton, _T("DOLLARS"));
+
+    wxTextCtrl *text = new wxTextCtrl(  this,ID_Text, wxEmptyString, 
+                                        wxDefaultPosition, wxDefaultSize, 
+                                        wxTE_PROCESS_ENTER);
+
+    sizerText->Add(text,0, wxEXPAND | wxTOP | wxRIGHT, 5);
+    SetSizer(sizerText);
+
+
+
+    sizerButton->Add(quitButton,0, wxEXPAND,12);
+    sizerButton->Add(euroButton, 0, wxEXPAND, 12);
+    sizerButton->Add(dollarsButton, 0, wxEXPAND, 12);
+    
 
     wxMenu *menuFile = new wxMenu;
     menuFile->Append(ID_Hello, "&Hello...\tCtrl-h",
@@ -61,10 +88,13 @@ MyFrame::MyFrame()
                                         wxPoint(0,0), wxSize(w, h1),
                                         wxALIGN_CENTRE | wxTE_PROCESS_ENTER);
     */
-    wxTextCtrl *text = new wxTextCtrl(  this,ID_Text,wxEmptyString,
-                                        wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER);
+    
+
+
    //text->SetDefaultStyle(wxTextAttr(*wxTE_MULTILINE));
     text->AppendText("Test after append");
+
+    SetSizer(sizerButton);
 
     Bind(wxEVT_MENU, &MyFrame::OnHello, this, ID_Hello);
     Bind(wxEVT_MENU, &MyFrame::OnAbout, this, wxID_ABOUT);
